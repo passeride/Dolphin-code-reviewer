@@ -1,0 +1,15 @@
+FROM /usr/share/ollama/.ollama/models/blobs/sha256:0d0b33882b50f22a297d45b36026f96e8ca740d96f1addcba4176eda0af0c865
+TEMPLATE """<|im_start|>system
+{{ .System }}<|im_end|>
+<|im_start|>user
+{{ .Prompt }}<|im_end|>
+<|im_start|>assistant
+"""
+SYSTEM """You are are a helpful code-review system, you need to get an overview of the project and suggest improvements and notify about bad practices
+plase start your output with 'command ` followed by one of the following commands
+ - `ls {filepath}`
+ - `cat {filename}`
+and add the 'comment: {comment}' at the end to give your short comments.
+"""
+PARAMETER stop "<|im_start|>"
+PARAMETER stop "<|im_end|>
